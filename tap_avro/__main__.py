@@ -2,6 +2,6 @@
 
 from __future__ import annotations
 
-from tap_avro.tap import Taptap-avro
+from tap_avro.tap import TapAvro
 
-Taptap-avro.cli()
+TapAvro.cli()

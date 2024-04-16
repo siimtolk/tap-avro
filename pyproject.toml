@@ -64,4 +64,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 # CLI declaration
-tap-avro = 'tap_avro.tap:Taptap-avro.cli'
+tap-avro = 'tap_avro.tap:TapAvro.cli'
