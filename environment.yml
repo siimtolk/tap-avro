@@ -1,0 +1,12 @@
+name: tap_avro
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11  # Specify the version of Python you need
+  - pip 
+  - pip:
+    - meltano
+    - cookiecutter
+    - poetry
+    - tox
