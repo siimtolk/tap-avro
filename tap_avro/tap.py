@@ -41,7 +41,7 @@ class TapAvro(Tap):
             description="An array of .avro file stream settings.",
         ),
         th.Property(
-            "csv_files_definition",
+            "avro_files_definition",
             th.StringType,
             description="A path to the avro file holding an array of file settings.",
         ),
