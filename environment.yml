@@ -4,6 +4,8 @@ channels:
   - defaults
 dependencies:
   - python=3.11  # Specify the version of Python you need
+  - pandas
+  - polars
   - pip 
   - pip:
     - meltano

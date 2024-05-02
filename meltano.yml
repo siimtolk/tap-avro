@@ -13,17 +13,25 @@ plugins:
     - state
     - catalog
     - discover
-    - about
-    - stream-maps
     config:
-      start_date: '2010-01-01T00:00:00Z'
+      files:
+      - entity: alphabet
+        file: alphabet.avro
+        path: ./tap_avro/tests/data/
+        keys:
+        - col1
+      add_metadata_columns: false
     settings:
-    # TODO: To configure using Meltano, declare settings and their types here:
-    - name: username
-    - name: password
-      kind: password
-    - name: start_date
-      value: '2010-01-01T00:00:00Z'
+      - name: files
+        description: Array of objects containing keys - `entity`, `path`, `keys`, `encoding` (Optional), `delimiter` (Optional), `doublequote` (Optional), `escapechar` (Optional), `quotechar` (Optional), `skipinitialspace` (Optional), `strict` (Optional)
+        kind: array
+      - name: avro_files_definition
+        description: "Project-relative path to JSON file holding array of objects with keys: `entity`, `path`, `keys`, and `encoding` (Optional)."
+        label: Avro Files Definition
+        placeholder: Ex. files-def.json
+      - name: add_metadata_columns
+        description: When True, add the metadata columns (`_sdc_source_file`, `_sdc_source_file_mtime`, `_sdc_source_lineno`) to output.
+        kind: boolean
   loaders:
   - name: target-jsonl
     variant: andyh1203
