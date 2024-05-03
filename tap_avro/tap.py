@@ -27,15 +27,15 @@ class TapAvro(Tap):
                     th.Property("entity", th.StringType, required=True),
                     th.Property("path", th.StringType, required=True),
                     th.Property("keys", th.ArrayType(th.StringType), required=True),
-                    th.Property(
-                        "encoding", th.StringType, required=False, default="utf-8"
-                    ),
-                    th.Property("delimiter", th.StringType, required=False),
-                    th.Property("doublequote", th.BooleanType, required=False),
-                    th.Property("escapechar", th.StringType, required=False),
-                    th.Property("quotechar", th.StringType, required=False),
-                    th.Property("skipinitialspace", th.BooleanType, required=False),
-                    th.Property("strict", th.BooleanType, required=False),
+                    # th.Property(
+                    #     "encoding", th.StringType, required=False, default="utf-8"
+                    # ),
+                    # th.Property("delimiter", th.StringType, required=False),
+                    # th.Property("doublequote", th.BooleanType, required=False),
+                    # th.Property("escapechar", th.StringType, required=False),
+                    # th.Property("quotechar", th.StringType, required=False),
+                    # th.Property("skipinitialspace", th.BooleanType, required=False),
+                    # th.Property("strict", th.BooleanType, required=False),
                 )
             ),
             description="An array of .avro file stream settings.",
@@ -69,21 +69,21 @@ class TapAvro(Tap):
         """Return a list of file configs.
 
         Either directly from the config.json or in an external file
-        defined by csv_files_definition.
+        defined by avro_files_definition.
         """
-        csv_files = self.config.get("files")
-        csv_files_definition = self.config.get("csv_files_definition")
-        if csv_files_definition:
-            if os.path.isfile(csv_files_definition):
-                with open(csv_files_definition) as f:
-                    csv_files = json.load(f)
+        avro_files = self.config.get("files")
+        avro_files_definition = self.config.get("avro_files_definition")
+        if avro_files_definition:
+            if os.path.isfile(avro_files_definition):
+                with open(avro_files_definition) as f:
+                    avro_files = json.load(f)
             else:
-                self.logger.error(f"tap-csv: '{csv_files_definition}' file not found")
+                self.logger.error(f"tap-avro: '{avro_files_definition}' file not found")
                 exit(1)
-        if not csv_files:
-            self.logger.error("No CSV file definitions found.")
+        if not avro_files:
+            self.logger.error("No avro file definitions found.")
             exit(1)
-        return csv_files
+        return avro_files
 
     def discover_streams(self) -> list[Stream]:
         """Return a list of discovered streams."""

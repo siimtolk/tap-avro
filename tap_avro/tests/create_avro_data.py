@@ -11,5 +11,18 @@ df.write_avro(path)
 
 dfa = pl.read_avro(path)
 
+import fastavro
 
-print(dfa)
+
+headers = []
+with open(path, 'rb') as f:
+        avro_reader = fastavro.reader(f)
+        schema = avro_reader.writer_schema
+
+        headers = []
+        for i in schema['fields']:
+                headers.append(i['name'])
+
+
+
+print(headers)

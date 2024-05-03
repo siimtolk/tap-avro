@@ -2,11 +2,9 @@
 
 from __future__ import annotations
 
-import csv
+import fastavro
 import os
-
 import sys
-csv.field_size_limit(sys.maxsize)
 
 from tap_avro.util import PROCESSED_FILES_LOG_PATH, log_processed_file_path, is_file_processed
 
@@ -42,7 +40,7 @@ class AvroStream(Stream):
         """
         for file_path in self.get_file_paths():            
             # Skip files that are already processed
-            # Skip processed filesS
+            # Skip processed files
             if is_file_processed(file_path):
                 continue
 
@@ -104,34 +102,31 @@ class AvroStream(Stream):
                     See warning for more detail."
             )
         self.file_paths = file_paths
+
         return file_paths
 
     def is_valid_filename(self, file_path: str) -> bool:
         """Return a boolean of whether the file includes Avro extension."""
         is_valid = True
-        if file_path[-4:] != ".csv":
+        try:
+            with open(file_path, 'rb') as f:
+                # Try to create an Avro reader, which will check the file's header
+                fastavro.reader(f)
+                #self.logger.warning(f"Including avro file '{file_path}'")
+            return is_valid
+        except Exception as e:
             is_valid = False
-            self.logger.warning(f"Skipping non-csv file '{file_path}'")
-            self.logger.warning(
-                "Please provide a CSV file that ends with '.csv'; e.g. 'users.csv'"
-            )
-        return is_valid
+            self.logger.warning(f"Skipping non-avro or broken avro file '{file_path}'")
+            return is_valid
 
     def get_rows(self, file_path: str) -> Iterable[list]:
-        """Return a generator of the rows in a particular CSV file."""
-        encoding = self.file_config.get("encoding", None)
-        csv.register_dialect(
-            "tap_dialect",
-            delimiter=self.file_config.get("delimiter", ","),
-            doublequote=self.file_config.get("doublequote", True),
-            escapechar=self.file_config.get("escapechar", None),
-            quotechar=self.file_config.get("quotechar", '"'),
-            skipinitialspace=self.file_config.get("skipinitialspace", False),
-            strict=self.file_config.get("strict", False),
-        )
-        with open(file_path, encoding=encoding) as f:
-            yield from csv.reader(f, dialect="tap_dialect")
+        """Return a generator of the rows in a particular avro file."""
+        with open(file_path, 'rb') as f:
+            yield from fastavro.reader(f)
 
+
+
+    
     @property
     def schema(self) -> dict:
         """Return dictionary of record schema.
@@ -142,10 +137,15 @@ class AvroStream(Stream):
         properties: list[th.Property] = []
         self.primary_keys = self.file_config.get("keys", [])
 
+        header = []
         for file_path in self.get_file_paths():
-            for header in self.get_rows(file_path):  # noqa: B007
-                break
+            with open(file_path, 'rb') as f:
+                avro_reader = fastavro.reader(f)
+                schema = avro_reader.writer_schema
+                for i in schema['fields']:
+                    header.append(i['name'])
             break
+        
 
         properties.extend(th.Property(column, th.StringType()) for column in header)
         # If enabled, add file's metadata to output
@@ -168,3 +168,4 @@ class AvroStream(Stream):
         self.header = header
 
         return th.PropertiesList(*properties).to_dict()
+

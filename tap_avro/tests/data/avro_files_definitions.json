@@ -1,0 +1,12 @@
+[
+    {
+      "entity": "alphabet_a",
+      "path": "tap_avro/tests/data/alphabet.avro",
+      "keys": ["col1"]
+    },
+    {
+        "entity": "alphabet_test",
+        "path": "tap_avro/tests/data/sub/",
+        "keys": ["col1"]
+      }
+]

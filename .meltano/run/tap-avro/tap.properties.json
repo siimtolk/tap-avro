@@ -1,0 +1,252 @@
+{
+  "streams": [
+    {
+      "tap_stream_id": "alphabet_a",
+      "replication_method": "FULL_TABLE",
+      "key_properties": [
+        "col1"
+      ],
+      "schema": {
+        "properties": {
+          "col1": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "col2": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "col3": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "_sdc_source_file": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "_sdc_source_file_mtime": {
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "_sdc_source_lineno": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "stream": "alphabet_a",
+      "metadata": [
+        {
+          "breadcrumb": [
+            "properties",
+            "col1"
+          ],
+          "metadata": {
+            "inclusion": "automatic",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "col2"
+          ],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "col3"
+          ],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "_sdc_source_file"
+          ],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "_sdc_source_file_mtime"
+          ],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "_sdc_source_lineno"
+          ],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": [],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true,
+            "selected-by-default": true,
+            "table-key-properties": [
+              "col1"
+            ]
+          }
+        }
+      ],
+      "selected": true
+    },
+    {
+      "tap_stream_id": "alphabet_test",
+      "replication_method": "FULL_TABLE",
+      "key_properties": [
+        "col1"
+      ],
+      "schema": {
+        "properties": {
+          "col1": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "col2": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "col3": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "_sdc_source_file": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "_sdc_source_file_mtime": {
+            "format": "date-time",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "_sdc_source_lineno": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "type": "object"
+      },
+      "stream": "alphabet_test",
+      "metadata": [
+        {
+          "breadcrumb": [
+            "properties",
+            "col1"
+          ],
+          "metadata": {
+            "inclusion": "automatic",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "col2"
+          ],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "col3"
+          ],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "_sdc_source_file"
+          ],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "_sdc_source_file_mtime"
+          ],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": [
+            "properties",
+            "_sdc_source_lineno"
+          ],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true
+          }
+        },
+        {
+          "breadcrumb": [],
+          "metadata": {
+            "inclusion": "available",
+            "selected": true,
+            "selected-by-default": true,
+            "table-key-properties": [
+              "col1"
+            ]
+          }
+        }
+      ],
+      "selected": true
+    }
+  ]
+}

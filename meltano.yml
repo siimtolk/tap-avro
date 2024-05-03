@@ -14,13 +14,13 @@ plugins:
     - catalog
     - discover
     config:
-      files:
-      - entity: alphabet
-        file: alphabet.avro
-        path: ./tap_avro/tests/data/
-        keys:
-        - col1
-      add_metadata_columns: false
+      #files:
+      #- entity: alphabet
+        #path: ./tap_avro/tests/data/
+        #keys:
+        #- col2
+      avro_files_definition: ./tap_avro/tests/data/avro_files_definitions.json
+      add_metadata_columns: true
     settings:
       - name: files
         description: Array of objects containing keys - `entity`, `path`, `keys`, `encoding` (Optional), `delimiter` (Optional), `doublequote` (Optional), `escapechar` (Optional), `quotechar` (Optional), `skipinitialspace` (Optional), `strict` (Optional)
@@ -36,3 +36,4 @@ plugins:
   - name: target-jsonl
     variant: andyh1203
     pip_url: target-jsonl
+ 
