@@ -52,11 +52,14 @@ class AvroStream(Stream):
 
             for row in self.get_rows(file_path):
                     file_lineno += 1
-                    if not file_lineno:
-                        continue
+                    values = list(row.values())
                     if self.config.get("add_metadata_columns", False):
-                        row = [file_path, file_last_modified, file_lineno, *row]
-                    yield dict(zip(self.header, row))
+                        values = [file_path, file_last_modified, file_lineno] + values
+                    yield dict(zip(self.header, values))
+
+
+
+
                     
             # Mark filepath as processed
             log_processed_file_path(file_path)
@@ -122,11 +125,9 @@ class AvroStream(Stream):
     def get_rows(self, file_path: str) -> Iterable[list]:
         """Return a generator of the rows in a particular avro file."""
         with open(file_path, 'rb') as f:
-            yield from fastavro.reader(f)
+            for row in fastavro.reader(f):
+                yield row
 
-
-
-    
     @property
     def schema(self) -> dict:
         """Return dictionary of record schema.

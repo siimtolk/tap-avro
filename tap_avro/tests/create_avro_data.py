@@ -23,6 +23,15 @@ with open(path, 'rb') as f:
         for i in schema['fields']:
                 headers.append(i['name'])
 
-
-
 print(headers)
+
+def get_rows(path):
+    with open(path, 'rb') as f:
+        avro_reader = fastavro.reader(f)
+        for record in avro_reader:
+            yield record
+
+r = get_rows(path)
+for i in r:
+        print(i)
+
